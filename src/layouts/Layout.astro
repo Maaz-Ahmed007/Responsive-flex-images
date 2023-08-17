@@ -20,20 +20,52 @@ const { title } = Astro.props;
 		<slot />
 	</body>
 </html>
+
 <style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60%);
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
 	}
+
 	html {
-		font-family: system-ui, sans-serif;
-		background: #13151A;
-		background-size: 224px;
+		color-scheme: dark;
 	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
+
+	body {
+		margin: 0;
+		font-family: system-ui;
+		font-size: 1.125rem;
+		line-height: 1.6;
+	}
+
+	img {
+		max-width: 100%;
+		display: block;
+	}
+
+	.accordion * {
+		margin: 0;
+	}
+
+	.flex-b {
+		--_button-size: 3rem;
+		--_panel-padding: 0.75rem;
+
+		flex-basis: calc((var(--_panel-padding) * 2) + var(--_button-size));
+		
+		
+	}
+
+	.accordion_padding {
+		padding: var(--_panel-padding);
+	}
+
+	.accordion_radius {
+		border-radius: calc(((var(--_panel-padding) * 2) + var(--_button-size)) / 2);
+	}
+
+	.accordion-panel:has([aria-expanded="true"]) {
+		flex-basis: clamp(15rem, 20vh, 20rem);
 	}
 </style>
