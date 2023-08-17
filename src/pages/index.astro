@@ -13,7 +13,7 @@ import Layout from '../layouts/Layout.astro';
 						aria-controls="panel1-content" 
 						aria-expanded="true"
 					>
-					<span class="accordion-title" id="panel1-title">Boating</span>
+					<span class="accordion-title | text-2xl font-bold" id="panel1-title">Boating</span>
 					<svg aria-hidden="true" class="accordion-icon | fill-green-400 bg-gray-700 bg-opacity-50 aspect-[1/1] p-3 rounded-[50%] w-12">
 							<use xlink:href="#boat"></use>
 						</svg>
@@ -27,7 +27,7 @@ import Layout from '../layouts/Layout.astro';
 					aria-hidden="false"
 					role="region"
 				>
-					<p>Port mutiny draught handsomely ye furl flogging line shrouds hulk.
+					<p class="translate-y-8 opacity-0">Port mutiny draught handsomely ye furl flogging line shrouds hulk.
 						Spirits Plate Fleet code of conduct.</p>
 					<img 
 						class="accordion-image | absolute inset-0 w-full h-full object-cover -z-[1]"
@@ -44,7 +44,7 @@ import Layout from '../layouts/Layout.astro';
 						aria-controls="panel2-content" 
 						aria-expanded="false"
 					>
-						<span class="accordion-title"> Anchors </span>
+						<span class="accordion-title | text-2xl font-bold"> Anchors </span>
 						<svg aria-hidden="true" class="accordion-icon | fill-teal-400 bg-gray-700 bg-opacity-50 aspect-[1/1] p-3 rounded-[50%] w-12">
 							<use xlink:href="#anchor"></use>
 						</svg>
@@ -58,7 +58,7 @@ import Layout from '../layouts/Layout.astro';
 					aria-hidden="true"
 					role="region"
 				>
-					<p>Ahoy league hands Sea Legs keelhaul salmagundi fire ship crimp
+					<p class="translate-y-8 opacity-0 transition-transform">Ahoy league hands Sea Legs keelhaul salmagundi fire ship crimp
 						Privateer galleon. Booty boom yard boatswain quarter.</p>
 					<img 
 						class="accordion-image | absolute inset-0 w-full h-full object-cover -z-[1]"
@@ -75,7 +75,7 @@ import Layout from '../layouts/Layout.astro';
 						aria-controls="panel3-content" 
 						aria-expanded="false"
 					>
-						<span class="accordion-title"> Fishing </span>
+						<span class="accordion-title | text-2xl font-bold"> Fishing </span>
 						<svg aria-hidden="true" class="accordion-icon | fill-blue-500 bg-gray-700 bg-opacity-50 aspect-[1/1] p-3 rounded-[50%] w-12">
 							<use xlink:href="#fishing"></use>
 						</svg>
@@ -89,7 +89,7 @@ import Layout from '../layouts/Layout.astro';
 					aria-hidden="true"
 					role="region"
 				>
-					<p>No prey, no pay heave down splice the main brace furl cable snow
+					<p class="translate-y-8 opacity-0 transition-transform">No prey, no pay heave down splice the main brace furl cable snow
 						walk the plank chase guns piracy bucko.</p>
 					<img 
 						class="accordion-image | absolute inset-0 w-full h-full object-cover -z-[1]"
@@ -106,7 +106,7 @@ import Layout from '../layouts/Layout.astro';
 						aria-controls="panel4-content" 
 						aria-expanded="false"
 					>
-						<span class="accordion-title"> Lighthouses </span>
+						<span class="accordion-title | text-2xl font-bold"> Lighthouses </span>
 						<svg aria-hidden="true" class="accordion-icon | fill-red-600 bg-gray-700 bg-opacity-50 aspect-[1/1] p-3 rounded-[50%] w-12">
 							<use xlink:href="#lighthouse"></use>
 						</svg>
@@ -120,7 +120,7 @@ import Layout from '../layouts/Layout.astro';
 					aria-hidden="true"
 					role="region"
 				>
-					<p>Deadlights squiffy salmagundi cable pinnace parrel topsail Corsair
+					<p class="translate-y-8 opacity-0 transition-transform">Deadlights squiffy salmagundi cable pinnace parrel topsail Corsair
 						Arr mizzenmast.</p>
 					<img 
 						class="accordion-image | absolute inset-0 w-full h-full object-cover -z-[1]"
@@ -137,7 +137,7 @@ import Layout from '../layouts/Layout.astro';
 						aria-controls="panel5-content" 
 						aria-expanded="false"
 					>
-						<span class="accordion-title"> Reefs </span>
+						<span class="accordion-title | text-2xl font-bold"> Reefs </span>
 						<svg aria-hidden="true" class="accordion-icon | fill-orange-400 bg-gray-700 bg-opacity-50 aspect-[1/1] p-3 rounded-[50%] w-12">
 							<use xlink:href="#coral"></use>
 						</svg>
@@ -151,7 +151,7 @@ import Layout from '../layouts/Layout.astro';
 					aria-hidden="true"
 					role="region"
 				>
-					<p>Keel yard poop deck brigantine gaff six pounders bring a spring
+					<p class="translate-y-8 opacity-0 transition-transform">Keel yard poop deck brigantine gaff six pounders bring a spring
 						upon her cable interloper lad pink.</p>
 					<img 
 						class="accordion-image | absolute inset-0 w-full h-full object-cover -z-[1]"
@@ -231,3 +231,31 @@ import Layout from '../layouts/Layout.astro';
 	  </svg>
 
 </Layout>
+
+<script>
+	const accordion = document.querySelector(".accordion")
+
+	if (accordion) {
+		accordion.addEventListener('click', (e: Event) => {
+			const activePanel = (e.target as HTMLElement).closest(".accordion-panel")
+			if (!activePanel) return
+			toggleAccordion(activePanel)
+		})
+	}
+
+	function toggleAccordion(panelToActivate) {
+		const buttons = panelToActivate.parentElement.querySelectorAll("button")
+		const contents = panelToActivate.parentElement.querySelectorAll(".accordion-content")
+
+		buttons.forEach((button) => {
+			button.setAttribute("aria-expanded", false)
+		})
+
+		contents.forEach((content) => {
+			content.setAttribute("aria-hidden", true)
+		})
+
+		panelToActivate.querySelector("button").setAttribute("aria-expanded", true)
+		panelToActivate.querySelector(".accordion-content").setAttribute("aria-hidden", false)
+	}
+</script>

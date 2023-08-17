@@ -51,14 +51,16 @@ const { title } = Astro.props;
 	.flex-b {
 		--_button-size: 3rem;
 		--_panel-padding: 0.75rem;
+		--_panel-gap: 1rem;
 
 		flex-basis: calc((var(--_panel-padding) * 2) + var(--_button-size));
-		
-		
+
+		transition: flex-basis 500ms;
 	}
 
 	.accordion_padding {
 		padding: var(--_panel-padding);
+		padding-right: calc(var(--_panel-padding) * 4);
 	}
 
 	.accordion_radius {
@@ -66,6 +68,24 @@ const { title } = Astro.props;
 	}
 
 	.accordion-panel:has([aria-expanded="true"]) {
-		flex-basis: clamp(15rem, 20vh, 20rem);
+		flex-basis: clamp(15rem, 40vh, 20rem);
+	}
+
+	.accordion-content > p {
+		transition: transform 500ms 250ms, opacity 500ms 250ms;
+		margin-left: calc(var(--_panel-gap) + var(--_button-size));
+	}
+
+	.accordion-panel:has([aria-expanded="true"]) p {
+		transform: translateY(0);
+		opacity: 1;
+	}
+
+	.accordion-image {
+		transition: filter 1000ms;
+	}
+
+	.accordion-panel:has([aria-expanded="true"]) .accordion-image {
+		filter: brightness(0.5)
 	}
 </style>
